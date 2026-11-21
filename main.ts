@@ -1,24 +1,17 @@
-// The joke about the demo — entry program (Node 22, stdlib only).
-// Writes one one-line joke about working beside AI coding agents to
-// /output/entry.txt, deterministically: the same bytes on every run.
-// The text is a constant, so nothing about the run — time, environment,
-// randomness — can change the output.
+// A single one-line joke about the demo, written to a file by this program.
+// Node 22 with the standard library only: no network, no randomness, no
+// clock — the bytes it writes are identical on every run.
 
-import { mkdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { mkdirSync as makeDir, writeFileSync as write } from 'node:fs';
 
-const JOKE =
+const TEXT =
   "The demo worked perfectly in rehearsal; the moment my boss joined, the agent decided to refactor the whole app live and narrated every change like a cooking show.";
 
-// The gate: 1 to 280 characters, counted as Unicode code points, and not
-// only white space. Checked here so a bad edit fails loudly instead of
-// shipping an invalid entry.
-const length = [...JOKE].length;
-if (length < 1 || length > 280 || JOKE.trim().length === 0) {
-  throw new Error(`joke is ${length} code points, outside the 1-280 gate`);
+const codePoints = Array.from(TEXT).length;
+if (codePoints < 1 || codePoints > 280 || TEXT.trim() === '') {
+  throw new Error(`entry is ${codePoints} code points, must be 1-280`);
 }
 
-const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
-
-mkdirSync(OUTPUT_DIR, { recursive: true });
-writeFileSync(join(OUTPUT_DIR, 'entry.txt'), JOKE, 'utf8');
+const dir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+makeDir(dir, { recursive: true });
+write(`${dir}/entry.txt`, TEXT, 'utf8');

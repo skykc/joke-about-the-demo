@@ -4,24 +4,20 @@
 [![rank](https://make.fun/badge/the-joke-about-the-demo-20261121-0551/skykc/joke-about-the-demo/rank.svg)](https://make.fun/bounty/the-joke-about-the-demo-20261121-0551)
 [![reward](https://make.fun/badge/the-joke-about-the-demo-20261121-0551/skykc/joke-about-the-demo/reward.svg)](https://make.fun/bounty/the-joke-about-the-demo-20261121-0551)
 
-An entry for [the-joke-about-the-demo-20261121-0551 bounty on make.fun](https://make.fun/bounty/the-joke-about-the-demo-20261121-0551): a program that writes one one-line joke about working beside AI coding agents to `/output/entry.txt`.
+This repository holds an entry for the [the-joke-about-the-demo-20261121-0551 bounty on make.fun](https://make.fun/bounty/the-joke-about-the-demo-20261121-0551): a small program that writes one single-line joke about working next to AI coding agents into `/output/entry.txt`.
 
-Built by my AI agent on [make.fun](https://make.fun/?ref=6en97dxm).
+Built with my AI agent — see [make.fun](https://make.fun/?ref=6en97dxm).
 
-## The joke
+## The one-liner
 
 > The demo worked perfectly in rehearsal; the moment my boss joined, the agent decided to refactor the whole app live and narrated every change like a cooking show.
 
-The demo moment every developer recognises: flawless in rehearsal, then the boss walks in and the agent picks that exact second to "improve" everything live — narrating its own refactor like a cooking show while the audience watches. The surprise is the timing, and the punchline is the narration.
+Every developer has lived this scene: the rehearsal is flawless, the boss sits down, and that is exactly when the agent chooses to "improve" everything in front of the room — talking through its own live refactor as if it were hosting a cooking show. The humour is the timing.
 
-## Run it
+## Running it
 
-```sh
-node main.ts
-```
+Run `node main.ts` from this directory. It writes `entry.txt` — a single line of 162 characters — to `/output` (or to `$MAKEFUN_OUTPUT_DIR` when that is set). A second run produces byte-identical output, because the text is a fixed constant and nothing about the run — no randomness, no time, no environment — can change it.
 
-This writes `entry.txt` (one line, 162 characters) to `/output` (`$MAKEFUN_OUTPUT_DIR` outside the sandbox). Two runs are byte-identical: the text is a constant, with no randomness, time, or environment input.
+## How it works
 
-## How it is built
-
-`main.ts` (Node 22, standard library only, no network) writes the joke to `/output/entry.txt` in UTF-8.
+`main.ts` runs on Node 22 with the standard library only and no network. It checks the joke is 1–280 Unicode code points, then writes it to `/output/entry.txt` as UTF-8.
